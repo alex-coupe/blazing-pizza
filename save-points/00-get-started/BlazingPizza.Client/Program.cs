@@ -15,6 +15,10 @@ namespace BlazingPizza.Client
 
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddScoped<OrderState>();
+            builder.Services.AddApiAuthorization<PizzaAuthenticationState>(options =>
+            {
+                options.AuthenticationPaths.LogOutSucceededPath = "";
+            });
             await builder.Build().RunAsync();
         }
     }
